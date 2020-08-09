@@ -1,0 +1,22 @@
+logging:
+  level:
+    root: info
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+
+spring:
+  devtools:
+    livereload:
+      enabled: false
+
+  jackson:
+    serialization:
+      indent-output: true
+
+  profiles:
+    active: dev
+
+application:

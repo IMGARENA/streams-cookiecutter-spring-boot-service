@@ -1,0 +1,23 @@
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /manage
+
+server:
+  address: localhost
+  port: 8080
+
+spring:
+  application:
+    name: {{ cookiecutter.project_name }}
+
+  profiles:
+    active: # Should be overridden
+
+application:
