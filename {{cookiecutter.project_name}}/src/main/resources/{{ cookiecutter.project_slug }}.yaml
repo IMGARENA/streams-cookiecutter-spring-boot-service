@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+    title: {{ cookiecutter.project_name }} operations
+    description: {{ cookiecutter.project_name}} operations
+    version: 1.0.0
+servers:
+    - url: 'https://localhost/'
+paths:
+    /{{ cookiecutter.project_slug }}/{{ '{' }}{{ cookiecutter.entity_name }}Id}/:
+        get:
+            summary: Returns a {{ cookiecutter.entity_name }}
+            description: >
+                Returns a {{ cookiecutter.entity_name }}.
+            operationId: get{{ cookiecutter.entity_name.capitalize() }}
+            parameters:
+                - name: {{ cookiecutter.entity_name }}Id
+                  in: path
+                  description: The id of the {{ cookiecutter.entity_name }}
+                  required: true
+                  schema:
+                      type: integer
+                      format: int64
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/{{ cookiecutter.entity_name.capitalize() }}DTO'
+                '404':
+                    description: There is no {{ cookiecutter.entity_name }} with that id
+
+
+
+components:
+    schemas:
+        {{ cookiecutter.entity_name.capitalize() }}DTO:
+            type: object
+            properties:
+                {{ cookiecutter.entity_name }}Id:
+                    type: integer
+                    format: int64
+                {{ cookiecutter.entity_name }}Name:
+                    type: string

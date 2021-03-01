@@ -1,0 +1,15 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: streams-{{cookiecutter.project_slug}}
+  namespace: streams
+spec:
+  routes:
+    - match: "Host(`{{cookiecutter.project_slug}}.frs-dev.imgarena.dev`)"
+      kind: Rule
+      middlewares:
+        - name: streams-{{cookiecutter.project_slug}}-basic-auth
+      services:
+        - name: streams-{{cookiecutter.project_slug}}
+          port: 8080

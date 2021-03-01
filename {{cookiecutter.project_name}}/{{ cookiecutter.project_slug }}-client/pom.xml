@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>{{ cookiecutter.project_slug}}</artifactId>
+        <groupId>{{ cookiecutter.base_package }}</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>{{ cookiecutter.project_slug}}-client</artifactId>
+    <name>{{ cookiecutter.project_name}} Client</name>
+    <description>{{ cookiecutter.project_name}} client library</description>
+
+    <!-- Needed to avoid spring-boot:build-image hanging because of lack of main -->
+    <properties>
+        <spring-boot.build-image.skip>true</spring-boot.build-image.skip>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>{{ cookiecutter.base_package}}</groupId>
+                <artifactId>bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>0.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <verbose>false</verbose>
+                            <inputSpec>${project.basedir}/../src/main/resources/openApi/{ cookiecutter.project_slug}}.yaml</inputSpec>
+                            <generatorName>java</generatorName>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <!--<templateDirectory>${project.basedir}/src/main/resources/openApi/templates/JavaSpring</templateDirectory>-->
+                            <configOptions>
+                                <skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+                                <skipDefaultInterface>false</skipDefaultInterface>
+                                <sourceFolder>src/gen/java/main</sourceFolder>
+                                <dateLibrary>java8</dateLibrary>
+                                <basePackage>{{ cookiecutter.base_package}}.{ cookiecutter.project_slug}}</basePackage>
+                                <invokerPackage>{{ cookiecutter.base_package}}.{ cookiecutter.project_slug}}</invokerPackage>
+                                <apiPackage>{{ cookiecutter.base_package}}.{ cookiecutter.project_slug}}.api</apiPackage>
+                                <configPackage>{{ cookiecutter.base_package}}.{ cookiecutter.project_slug}}.config</configPackage>
+                                <modelPackage>{{ cookiecutter.base_package}}.{ cookiecutter.project_slug}}.model</modelPackage>
+                                <openApiNullable>false</openApiNullable>
+                                <delegatePattern>true</delegatePattern>
+                                <groupId>{{ cookiecutter.base_package}}</groupId>
+                                <artifactId>{ cookiecutter.project_slug}}-client</artifactId>
+                                <artifactDescription>Java client for the { cookiecutter.project_slug}} service</artifactDescription>
+                                <library>webclient</library>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

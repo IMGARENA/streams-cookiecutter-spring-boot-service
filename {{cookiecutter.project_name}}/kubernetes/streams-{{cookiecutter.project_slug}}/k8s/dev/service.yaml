@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streams-{{cookiecutter.project_slug}}
+  namespace: streams
+spec:
+  type: ClusterIP
+  selector:
+    app: streams
+    component: {{cookiecutter.project_slug}}
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

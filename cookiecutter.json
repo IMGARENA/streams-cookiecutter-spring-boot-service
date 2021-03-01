@@ -1,7 +1,8 @@
 {
-    "project_name": "Project",
+    "project_name": "The Project Name",
     "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
-    "project_description": "Description",
-    "base_package": "com.project",
-    "package_dirs": "{{ cookiecutter.base_package.replace('.', '/') }}"
+    "project_description": "The Project Description",
+    "base_package": "com.imgarena",
+    "package_dirs": "{{ cookiecutter.base_package.replace('.', '/') }}",
+    "entity_name": "{{ cookiecutter.project_slug[:-1] }}"
 }
