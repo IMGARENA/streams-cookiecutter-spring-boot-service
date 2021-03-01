@@ -1,7 +1,7 @@
 {
-    "project_name": "The Project Name",
+    "project_name": "Enter your project name",
     "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
-    "project_description": "The Project Description",
+    "project_description": "A service in the Streams application",
     "base_package": "com.imgarena",
     "package_dirs": "{{ cookiecutter.base_package.replace('.', '/') }}",
     "entity_name": "{{ cookiecutter.project_slug[:-1] }}"
